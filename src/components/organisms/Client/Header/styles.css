@@ -1,0 +1,33 @@
+/* navbar */
+.navbar {
+  -webkit-box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand img {
+  width: 30px;
+}
+.navbar-brand span {
+  letter-spacing: 2px;
+  font-family: var(--lg-font);
+}
+.nav-link a,
+.icon a {
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+}
+.nav-link a:hover,
+.icon a:hover {
+  color: var(--text-color-light) !important;
+}
+.nav-item {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-btns .badge {
+  background-color: var(--primary-color) !important;
+  color: var(--black) !important;
+}
+
+.nav-btns .icon {
+  color: var(--text-color) !important;
+}
