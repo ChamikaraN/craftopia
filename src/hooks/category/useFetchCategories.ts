@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
-import logEvent from "../../utils/logger";
-import { ERROR, INFO } from "../../constants/sanityConst";
-import { Category } from "../../types";
-import { useAppDispatch } from "../../redux/hooks";
-import { fetchCategories } from "../../services/CategoryService";
-import { loadCategories } from "../../redux/Category/categorySlice";
+import logEvent from "@utils/logger";
+import { ERROR, INFO } from "@constants/sanityConst";
+import { Category } from "@/types";
+import { useAppDispatch } from "@redux/hooks";
+import { fetchCategories } from "@services/CategoryService";
+import { loadCategories } from "@redux/Category/categorySlice";
 
 const useFetchCategories = () => {
   const dispatch = useAppDispatch();

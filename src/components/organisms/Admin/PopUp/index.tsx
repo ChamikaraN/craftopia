@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import Button from "../../../atoms/Button";
+import Button from "@atoms/Client/Button";
 
 interface PopUpProps {
   show: boolean;

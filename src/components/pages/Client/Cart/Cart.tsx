@@ -1,11 +1,11 @@
 import React from "react";
-import "./styles.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faRefresh } from "@fortawesome/free-solid-svg-icons";
-import { useAppDispatch } from "../../../../redux/hooks";
-import { clearCart } from "../../../../redux/Cart/cartSlice";
-function Cart() {
+import { useAppDispatch } from "@redux/hooks";
+import { clearCart } from "@redux/Cart/cartSlice";
+import "./styles.css";
+
+const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
   return (
     <section className="cart">
@@ -153,6 +153,6 @@ function Cart() {
       </section>
     </section>
   );
-}
+};
 
 export default Cart;

@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
-import logEvent from "../../utils/logger";
-import { ERROR, INFO } from "../../constants/sanityConst";
-import { fetchProducts } from "../../services/ProductService";
-import { Product } from "../../types";
-import { useAppDispatch } from "../../redux/hooks";
-import { loadProducts } from "../../redux/Product/productSlice";
+import logEvent from "@utils/logger";
+import { ERROR, INFO } from "@constants/sanityConst";
+import { fetchProducts } from "@services/ProductService";
+import { Product } from "@/types";
+import { useAppDispatch } from "@redux/hooks";
+import { loadProducts } from "@redux/Product/productSlice";
 
 const useFetchProducts = () => {
   const dispatch = useAppDispatch();

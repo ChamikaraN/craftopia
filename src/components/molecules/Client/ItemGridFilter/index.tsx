@@ -1,6 +1,6 @@
 import React from "react";
-import { Category } from "../../../../types";
-import Button from "../../../atoms/Button";
+import { Category } from "@/types";
+import Button from "@/components/atoms/Client/Button";
 
 interface ItemGridFilterProps {
   categories: Category[];

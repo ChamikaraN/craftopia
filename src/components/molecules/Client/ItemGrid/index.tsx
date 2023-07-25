@@ -1,6 +1,6 @@
 import React from "react";
-import ItemCard from "../ItemCard";
-import { Product } from "../../../../types";
+import ItemCard from "@molecules/Client/ItemCard";
+import { Product } from "@/types";
 
 interface ItemGridProps {
   products: Product[];

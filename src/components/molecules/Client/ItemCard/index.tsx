@@ -1,7 +1,8 @@
 import React from "react";
 import { faShoppingCart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Product } from "../../../../types";
+import { Product } from "@/types";
+
 interface ItemCardProps {
   product: Product;
   key: string;

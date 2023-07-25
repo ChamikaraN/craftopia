@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import ClientLayout from "../components/templates/ClientLayout";
+import ClientLayout from "@templates/ClientLayout";
 
 function PublicRoutes() {
   return (

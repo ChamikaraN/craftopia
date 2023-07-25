@@ -3,7 +3,7 @@ import sanityClient from "../sanityClient";
 const logEvent = async (
   logLevel: string,
   message: string,
-  data: any
+  data: unknown
 ): Promise<void> => {
   try {
     await sanityClient.create({

@@ -3,13 +3,13 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { RootErrorBoundary } from "../components/pages/RootErrorBoundary";
-import { ProjectErrorBoundary } from "../components/pages/ProjectErrorBoundary";
-import Login from "../components/pages/Admin/Login";
-import Admin from "../components/pages/Admin/Dashboard/Admin";
-import Home from "../components/pages/Client/Home";
-import Shop from "../components/pages/Client/Shop/Shop";
-import Cart from "../components/pages/Client/Cart/Cart";
+import { RootErrorBoundary } from "@pages/RootErrorBoundary";
+import { ProjectErrorBoundary } from "@pages/ProjectErrorBoundary";
+import Login from "@pages/Admin/Login";
+import Admin from "@pages/Admin/Dashboard/Admin";
+import Home from "@pages/Client/Home";
+import Shop from "@pages/Client/Shop/Shop";
+import Cart from "@pages/Client/Cart/Cart";
 
 import { lazy } from "react";
 

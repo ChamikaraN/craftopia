@@ -1,5 +1,5 @@
 import axios from "axios";
-import AuthService from "../services/AuthService";
+import AuthService from "@services/AuthService";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const authService = new AuthService();

@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import useFetchProducts from "../../../../hooks/product/useFetchProducts";
-import useFetchCategories from "../../../../hooks/category/useFetchCategories";
-import { useAppSelector } from "../../../../redux/hooks";
-import Button from "../../../atoms/Button";
-import ItemGridFilter from "../../../molecules/Client/ItemGridFilter";
-import ItemGrid from "../../../molecules/Client/ItemGrid";
+import useFetchProducts from "@hooks/product/useFetchProducts";
+import useFetchCategories from "@hooks/category/useFetchCategories";
+import { useAppSelector } from "@redux/hooks";
+import Button from "@/components/atoms/Client/Button";
+import ItemGridFilter from "@molecules/Client/ItemGridFilter";
+import ItemGrid from "@molecules/Client/ItemGrid";
 
 const SpecialSelection: React.FC = () => {
   const {

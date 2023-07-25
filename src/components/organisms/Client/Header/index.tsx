@@ -6,7 +6,7 @@ import {
   faMasksTheater,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "@redux/hooks";
 import "./styles.css";
 
 const Header: React.FC = () => {

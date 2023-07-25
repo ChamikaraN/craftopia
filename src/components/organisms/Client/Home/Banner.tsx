@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../../atoms/Button";
+import Button from "@atoms/Client/Button";
 
 const Banner: React.FC = () => {
   return (

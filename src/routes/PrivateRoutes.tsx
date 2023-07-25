@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-import AdminLayout from "../components/templates/AdminLayout";
+import AdminLayout from "@templates/AdminLayout";
 import { Suspense } from "react";
 
 function PrivateRoutes() {
