@@ -1,15 +1,20 @@
+import React from "react";
 import { faShoppingCart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { Product } from "../../../../types";
+interface ItemCardProps {
+  product: Product;
+  key: string;
+}
 
-function ItemCard({ i }) {
+const ItemCard: React.FC<ItemCardProps> = ({ product, key }) => {
   return (
-    <div key={i} className="col-md-6 col-lg-4 col-xl-3 p-2 best">
+    <div key={key} className="col-md-6 col-lg-4 col-xl-3 p-2 best">
       <div className="collection-img position-relative">
         <img
-          src="./images/c_formal_gray_shirt.png"
+          src={product.images?.length ? product.images[0] : ""}
           className="w-100"
-          alt={`Product ${i}`}
+          alt={`Product ${key}`}
         />
         <span className="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">
           <FontAwesomeIcon icon={faShoppingCart} />
@@ -33,11 +38,11 @@ function ItemCard({ i }) {
             <FontAwesomeIcon icon={faStar} />
           </span>
         </div>
-        <p className="text-capitalize my-1">Gray Shirt</p>
-        <span className="fw-bold">$ 45.50</span>
+        <p className="text-capitalize my-1">{product.name}</p>
+        <span className="fw-bold">$ {product.price}</span>
       </div>
     </div>
   );
-}
+};
 
 export default ItemCard;

@@ -1,8 +1,12 @@
 import React from "react";
-import "./cart.css";
+import "./styles.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faRefresh } from "@fortawesome/free-solid-svg-icons";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { clearCart } from "../../../../redux/Cart/cartSlice";
 function Cart() {
+  const dispatch = useAppDispatch();
   return (
     <section className="cart">
       <section className="h-100 h-custom">
@@ -18,7 +22,9 @@ function Cart() {
                     <div className="col-lg-8">
                       <div className="p-5">
                         <div className="d-flex justify-content-between align-items-center mb-5">
-                          <h2 className="mb-0 text-black">Shopping Cart</h2>
+                          <h2 className="mb-0 text-black">
+                            Your Order Summary
+                          </h2>
                           <h6 className="mb-0 text-muted">3 items</h6>
                         </div>
                         <hr className="my-4" />
@@ -59,13 +65,35 @@ function Cart() {
                           </div>
                         </div>
                         <hr className="my-4" />
-                        <div className="pt-5">
-                          <h6 className="mb-0">
-                            <a href="#!" className="text-body">
-                              <i className="fas fa-long-arrow-alt-left me-2" />
-                              Back to shop
-                            </a>
-                          </h6>
+                        <div className="row">
+                          <div className="col">
+                            <div className="pt-5">
+                              <h6 className="mb-0">
+                                <div className="text-body">
+                                  <i className="fas fa-long-arrow-alt-left me-2" />
+                                  Back to shop
+                                </div>
+                              </h6>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="pt-5 ">
+                              <h6 className="mb-0">
+                                <p
+                                  className="text-body text-right"
+                                  onClick={() => {
+                                    dispatch(clearCart());
+                                  }}
+                                >
+                                  <FontAwesomeIcon
+                                    icon={faRefresh}
+                                    className="mx-2"
+                                  />
+                                  Clear Cart
+                                </p>
+                              </h6>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -1,14 +1,14 @@
-import React, { ReactNode, MouseEventHandler } from "react";
+import React from "react";
 import { Button as BsButton } from "react-bootstrap";
 import "./style.css";
 
 interface ButtonProps {
   type?: "button" | "reset" | "submit";
   variant?: string;
-  onClickHandler: MouseEventHandler<HTMLButtonElement>; // Update type to React.MouseEventHandler<HTMLButtonElement>
+  onClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
   size: "sm" | "lg";
   isDisable?: boolean;
-  title: ReactNode;
+  title: React.ReactNode;
   styles?: string;
 }
 
@@ -20,8 +20,8 @@ const Button: React.FC<ButtonProps> = ({
   isDisable = false,
   title,
   styles = "",
-}): JSX.Element => {
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+}) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     onClickHandler(e);
   };

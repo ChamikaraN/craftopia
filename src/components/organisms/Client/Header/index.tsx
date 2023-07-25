@@ -1,15 +1,17 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
   faMasksTheater,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../../redux/hooks";
 import "./styles.css";
 
-function Header() {
+const Header: React.FC = () => {
   const [navbarToggled, setNavbarToggled] = useState(false);
+  const { cartItems } = useAppSelector((state) => state.cart);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
       <div className="container">
@@ -28,7 +30,7 @@ function Header() {
               </Link>
             </span>
             <span className="position-absolute top-0 start-100 translate-middle badge">
-              5
+              {cartItems.length > 0 && cartItems.length}
             </span>
           </button>
           <button type="button" className="btn position-relative">
@@ -69,6 +71,6 @@ function Header() {
       </div>
     </nav>
   );
-}
+};
 
 export default Header;

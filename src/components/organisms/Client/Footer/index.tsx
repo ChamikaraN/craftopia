@@ -1,13 +1,13 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./styles.css";
 import {
   faEnvelope,
-  faFaceAngry,
   faMapMarkedAlt,
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import "./styles.css";
 
-function Footer() {
+const Footer: React.FC = () => {
   return (
     <footer className="bg-dark py-5">
       <div className="container">
@@ -116,6 +116,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

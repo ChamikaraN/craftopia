@@ -1,14 +1,8 @@
-import { useState } from "react";
 import "./styles.min.css";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 function AdminLayout() {
-  const [isSidebarClosed, setSidebarClosed] = useState(false);
-
-  const handleToggleSidebar = () => {
-    setSidebarClosed(!isSidebarClosed);
-  };
   return (
     <div id="wrapper">
       {/* Sidebar */}

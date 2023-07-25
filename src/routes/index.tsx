@@ -5,13 +5,16 @@ import {
 } from "react-router-dom";
 import { RootErrorBoundary } from "../components/pages/RootErrorBoundary";
 import { ProjectErrorBoundary } from "../components/pages/ProjectErrorBoundary";
-import Login from "../components/pages/Admin/Login/Login";
+import Login from "../components/pages/Admin/Login";
 import Admin from "../components/pages/Admin/Dashboard/Admin";
-import PrivateRoutes from "./PrivateRoutes";
-import PublicRoutes from "./PublicRoutes";
 import Home from "../components/pages/Client/Home";
 import Shop from "../components/pages/Client/Shop/Shop";
 import Cart from "../components/pages/Client/Cart/Cart";
+
+import { lazy } from "react";
+
+const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
+const PublicRoutes = lazy(() => import("./PublicRoutes"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(

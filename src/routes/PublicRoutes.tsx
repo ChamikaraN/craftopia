@@ -1,7 +1,12 @@
+import { Suspense } from "react";
 import ClientLayout from "../components/templates/ClientLayout";
 
 function PublicRoutes() {
-  return <ClientLayout />;
+  return (
+    <Suspense fallback={<div> Loading </div>}>
+      <ClientLayout />
+    </Suspense>
+  );
 }
 
 export default PublicRoutes;
