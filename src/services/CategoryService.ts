@@ -1,6 +1,17 @@
 import axios from "@utils/axiosInstance";
 import { Category } from "@/types";
 
+export const addCategory = async (
+  categoryData: Category
+): Promise<Category> => {
+  try {
+    const response = await axios.post<Category>("category", categoryData);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to add category");
+  }
+};
+
 export const fetchCategories = async (): Promise<Category[]> => {
   try {
     const response = await axios.get<Category[]>("category");

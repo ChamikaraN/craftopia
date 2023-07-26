@@ -7,7 +7,7 @@ interface PopUpProps {
   hide: () => void;
   onConfirm: () => void;
   title: string;
-  message: ReactNode;
+  content: ReactNode;
 }
 
 const PopUp: React.FC<PopUpProps> = ({
@@ -15,7 +15,7 @@ const PopUp: React.FC<PopUpProps> = ({
   hide,
   onConfirm,
   title,
-  message,
+  content,
 }) => {
   return (
     <Modal
@@ -28,13 +28,19 @@ const PopUp: React.FC<PopUpProps> = ({
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{message}</Modal.Body>
+      <Modal.Body>{content}</Modal.Body>
       <Modal.Footer>
-        <Button variant={"danger"} onClickHandler={hide} title={"Cancel"} />
         <Button
-          variant={"primary"}
+          variant="danger"
+          title="Cancel"
+          onClickHandler={hide}
+          size="sm"
+        />
+        <Button
+          variant="primary"
+          title="Ok"
           onClickHandler={onConfirm}
-          title={"Delete"}
+          size="sm"
           styles={"float-left"}
         />
       </Modal.Footer>

@@ -16,10 +16,10 @@ export interface Product {
 export interface Category {
   name: string;
   description: string;
-  image: string;
+  image: string | File;
   status: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   _id?: string;
   id?: string;
   __v?: number;

@@ -1,5 +1,6 @@
 import PopUp from "@/components/organisms/Admin/PopUp";
 import useFetchCategories from "@/hooks/category/useFetchCategories";
+import useAddCategory from "@/hooks/category/useAddCategory";
 import { useAppSelector } from "@/redux/hooks";
 import { Category } from "@/types";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
@@ -8,28 +9,53 @@ import React, { useState } from "react";
 
 const Categories: React.FC = () => {
   const { isLoading } = useFetchCategories();
+  const { mutate: addCategoryMutation, isLoading: addCategoryIsLoading } =
+    useAddCategory();
   const { categories } = useAppSelector((state) => state.category);
 
-  // State variables for managing the visibility of the popup
+  // State variables for managing the visibility of the popup and form fields
   const [showPopUp, setShowPopUp] = useState(false);
-  // State for new category form fields
   const [newCategory, setNewCategory] = useState<Category>({
     name: "",
     description: "",
     image: "",
-    status: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    status: false, // Set the initial status value to false
   });
 
   const handleAddCategory = () => {
-    // Add logic to handle adding the new category
-    console.log("Adding new category:", newCategory);
-    setShowPopUp(true); // Show the popup message after adding the category
+    // If the image is a File, create a new FormData object to include the form fields and the image
+    if (newCategory.image instanceof File) {
+      const formData = new FormData();
+      formData.append("name", newCategory.name);
+      formData.append("description", newCategory.description);
+      formData.append("image", newCategory.image);
+      formData.append("status", newCategory.status.toString()); // Convert the status value to string
+
+      // Perform the API request using the formData
+      addCategoryMutation(formData);
+    } else {
+      // If the image is a string, it means the category already has an image URL, so you can proceed with your regular API request
+      addCategoryMutation(newCategory);
+    }
+
+    // Clear the form fields and hide the popup after submission
+    setNewCategory({
+      name: "",
+      description: "",
+      image: "",
+      status: false, // Set the status value back to false after submission
+    });
+    setShowPopUp(false);
   };
 
   // Function to show the popup
   const showPopUpHandler = () => {
+    setNewCategory({
+      name: "",
+      description: "",
+      image: "",
+      status: true,
+    });
     setShowPopUp(true);
   };
 
@@ -50,20 +76,12 @@ const Categories: React.FC = () => {
   // Function to handle image upload
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        // Set the base64 string to the image field in the newCategory state
-        setNewCategory({ ...newCategory, image: reader.result as string });
-      };
-
-      reader.readAsDataURL(file);
+      setNewCategory({ ...newCategory, image: e.target.files[0] });
     }
   };
 
   // JSX element for the message
-  const popupMessage = (
+  const popupContent = (
     <form>
       <div className="form-group">
         <label htmlFor="name">Category Name</label>
@@ -99,14 +117,6 @@ const Categories: React.FC = () => {
           onChange={handleImageChange}
         />
       </div>
-      {/* Add more form fields for other properties of Category if needed */}
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={handleAddCategory}
-      >
-        Add Category
-      </button>
     </form>
   );
 
@@ -171,9 +181,9 @@ const Categories: React.FC = () => {
       <PopUp
         show={showPopUp}
         hide={hidePopUpHandler}
-        onConfirm={handleDelete}
+        onConfirm={handleAddCategory}
         title="Add Category"
-        message={popupMessage}
+        content={popupContent}
       />
     </>
   );
