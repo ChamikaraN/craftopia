@@ -28,7 +28,7 @@ function Sidebar() {
       </a>
       <hr className="sidebar-divider my-0" />
       <li className="nav-item active">
-        <a className="nav-link" href="/dashboard">
+        <a className="nav-link" href="/admin/dashboard">
           <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
           <span>Dashboard</span>
         </a>
@@ -36,7 +36,7 @@ function Sidebar() {
       <hr className="sidebar-divider" />
 
       <li className="nav-item ">
-        <a className="nav-link" href="/dashboard">
+        <a className="nav-link" href="/admin/categories">
           <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
           <span>Categories</span>
         </a>
@@ -44,7 +44,7 @@ function Sidebar() {
       <hr className="sidebar-divider" />
 
       <li className="nav-item ">
-        <a className="nav-link" href="/dashboard">
+        <a className="nav-link" href="/admin/products">
           <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
           <span>Products</span>
         </a>
@@ -52,7 +52,7 @@ function Sidebar() {
       <hr className="sidebar-divider" />
 
       <li className="nav-item ">
-        <a className="nav-link" href="/dashboard">
+        <a className="nav-link" href="/admin/orders">
           <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
           <span>Orders</span>
         </a>

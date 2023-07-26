@@ -5,12 +5,16 @@ import {
 } from "react-router-dom";
 import { RootErrorBoundary } from "@pages/RootErrorBoundary";
 import { ProjectErrorBoundary } from "@pages/ProjectErrorBoundary";
-import Login from "@pages/Admin/Login";
-import Admin from "@pages/Admin/Dashboard/Admin";
+
 import Home from "@pages/Client/Home";
 import Shop from "@pages/Client/Shop/Shop";
 import Cart from "@pages/Client/Cart/Cart";
-
+import Login from "@pages/Admin/Login";
+import Admin from "@pages/Admin/Dashboard";
+import Categories from "@pages/Admin/Categories";
+import Products from "@/components/pages/Admin/Products";
+import Orders from "@pages/Admin/Orders";
+import Settings from "@pages/Admin/Settings";
 import { lazy } from "react";
 
 const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
@@ -39,37 +43,40 @@ const router = createBrowserRouter(
 
       <Route element={<PrivateRoutes />}>
         <Route
-          path="/dashboard"
+          path="admin/dashboard"
           element={<Admin />}
           errorElement={<ProjectErrorBoundary />}
-        >
-          <Route
-            path="orders"
-            element={<Home />}
-            errorElement={<ProjectErrorBoundary />}
-          />
-          <Route
-            path="products"
-            element={<Home />}
-            errorElement={<ProjectErrorBoundary />}
-          >
-            <Route
-              path="add"
-              element={<Home />}
-              errorElement={<ProjectErrorBoundary />}
-            ></Route>
-            <Route
-              path="edit"
-              element={<Home />}
-              errorElement={<ProjectErrorBoundary />}
-            ></Route>
-          </Route>
-          <Route
-            path="settings"
-            element={<Home />}
-            errorElement={<ProjectErrorBoundary />}
-          />
-        </Route>
+        />
+        <Route
+          path="admin/categories"
+          element={<Categories />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
+          path="admin/products"
+          element={<Products />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
+          path="admin/products/add"
+          element={<Home />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
+          path="admin/products/edit"
+          element={<Home />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
+          path="admin/orders"
+          element={<Orders />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
+          path="admin/settings"
+          element={<Settings />}
+          errorElement={<ProjectErrorBoundary />}
+        />
       </Route>
 
       <Route path="/login" element={<Login />} />

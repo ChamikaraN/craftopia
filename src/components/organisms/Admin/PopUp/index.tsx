@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "@atoms/Client/Button";
 
@@ -7,7 +7,7 @@ interface PopUpProps {
   hide: () => void;
   onConfirm: () => void;
   title: string;
-  message: string;
+  message: ReactNode;
 }
 
 const PopUp: React.FC<PopUpProps> = ({
@@ -18,7 +18,13 @@ const PopUp: React.FC<PopUpProps> = ({
   message,
 }) => {
   return (
-    <Modal show={show} onHide={() => hide()} backdrop="static" keyboard={false}>
+    <Modal
+      show={show}
+      onHide={() => hide()}
+      backdrop="static"
+      keyboard={false}
+      size="lg"
+    >
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
