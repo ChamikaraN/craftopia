@@ -1,35 +1,30 @@
 import React, { useCallback, useEffect, useState } from "react";
-import useFetchProducts from "@hooks/product/useFetchProducts";
-import useFetchCategories from "@hooks/category/useFetchCategories";
-import { useAppSelector } from "@redux/hooks";
 import Button from "@/components/atoms/Client/Button";
 import ItemGridFilter from "@molecules/Client/ItemGridFilter";
 import ItemGrid from "@molecules/Client/ItemGrid";
+import { Product, Category } from "@/types";
 
-const SpecialSelection: React.FC = () => {
-  const {
-    isLoading: productsLoading,
-    isError: productsError,
-    isSuccess: productsSuccess,
-  } = useFetchProducts();
-  const {
-    isLoading: categoriesLoading,
-    isError: categoriesError,
-    isSuccess: categoriesSuccess,
-    error: categoriesErrorData,
-  } = useFetchCategories();
-  const { products } = useAppSelector((state) => state.product);
-  const { categories } = useAppSelector((state) => state.category);
-  const [filteredProducts, setFilteredProducts] = useState(products);
+interface SpecialSelectionProps {
+  products: Product[];
+  categories: Category[];
+}
+
+const SpecialSelection: React.FC<SpecialSelectionProps> = ({
+  products,
+  categories,
+}) => {
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
   const filterProducts = useCallback(
-    (id: string) => {
-      if (!id) {
+    (categoryId: string) => {
+      if (!categoryId) {
         // If categoryId is empty or undefined, set all products
         setFilteredProducts(products);
       } else {
         // If categoryId is provided, filter the products based on the category
-        const filtered = products.filter((product) => product.category === id);
+        const filtered = products.filter(
+          (product) => product.category === categoryId
+        );
         setFilteredProducts(filtered);
       }
     },
@@ -39,14 +34,6 @@ const SpecialSelection: React.FC = () => {
   useEffect(() => {
     filterProducts("");
   }, [products, filterProducts]);
-
-  if (productsLoading || categoriesLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (productsError) {
-    return <div>Error: </div>;
-  }
 
   return (
     <section id="collection" className="py-5">
@@ -71,7 +58,6 @@ const SpecialSelection: React.FC = () => {
             />
           </div>
           <div className="collection-list mt-4 row gx-0 gy-3">
-            {/* Only render the ItemGrid when data is available */}
             {filteredProducts.length > 0 ? (
               <ItemGrid products={filteredProducts} />
             ) : (

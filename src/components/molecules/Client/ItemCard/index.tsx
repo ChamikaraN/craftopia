@@ -9,14 +9,11 @@ interface ItemCardProps {
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ product, key }) => {
+  const imageUrl = typeof product.image === "string" ? product.image : "";
   return (
     <div key={key} className="col-md-6 col-lg-4 col-xl-3 p-2 best">
       <div className="collection-img position-relative">
-        <img
-          src={product.images?.length ? product.images[0] : ""}
-          className="w-100"
-          alt={`Product ${key}`}
-        />
+        <img src={imageUrl} className="w-100" alt={`Product ${key}`} />
         <span className="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">
           <FontAwesomeIcon icon={faShoppingCart} />
         </span>

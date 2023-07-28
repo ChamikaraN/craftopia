@@ -19,7 +19,7 @@ function Sidebar() {
     >
       <a
         className="sidebar-brand d-flex align-items-center justify-content-center"
-        href="/dashboard"
+        href="/admin/dashboard"
       >
         <div className="sidebar-brand-icon rotate-n-15">
           <FontAwesomeIcon icon={faMasksTheater} size={"2x"} />

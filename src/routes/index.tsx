@@ -16,6 +16,8 @@ import Products from "@/components/pages/Admin/Products";
 import Orders from "@pages/Admin/Orders";
 import Settings from "@pages/Admin/Settings";
 import { lazy } from "react";
+import AddEditCategory from "@/components/pages/Admin/Categories/AddEditCategory";
+import AddEditProduct from "@/components/pages/Admin/Products/AddEditProduct";
 
 const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
 const PublicRoutes = lazy(() => import("./PublicRoutes"));
@@ -53,18 +55,28 @@ const router = createBrowserRouter(
           errorElement={<ProjectErrorBoundary />}
         />
         <Route
+          path="admin/categories/add"
+          element={<AddEditCategory />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
+          path="admin/categories/edit/:id"
+          element={<AddEditCategory />}
+          errorElement={<ProjectErrorBoundary />}
+        />
+        <Route
           path="admin/products"
           element={<Products />}
           errorElement={<ProjectErrorBoundary />}
         />
         <Route
           path="admin/products/add"
-          element={<Home />}
+          element={<AddEditProduct />}
           errorElement={<ProjectErrorBoundary />}
         />
         <Route
-          path="admin/products/edit"
-          element={<Home />}
+          path="admin/products/edit/:id"
+          element={<AddEditProduct />}
           errorElement={<ProjectErrorBoundary />}
         />
         <Route

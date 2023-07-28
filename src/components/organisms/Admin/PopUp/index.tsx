@@ -6,6 +6,7 @@ interface PopUpProps {
   show: boolean;
   hide: () => void;
   onConfirm: () => void;
+  action: string;
   title: string;
   content: ReactNode;
 }
@@ -14,6 +15,7 @@ const PopUp: React.FC<PopUpProps> = ({
   show,
   hide,
   onConfirm,
+  action,
   title,
   content,
 }) => {
@@ -38,7 +40,7 @@ const PopUp: React.FC<PopUpProps> = ({
         />
         <Button
           variant="primary"
-          title="Ok"
+          title={action}
           onClickHandler={onConfirm}
           size="sm"
           styles={"float-left"}
