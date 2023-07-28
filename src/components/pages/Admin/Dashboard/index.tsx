@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./styles.css";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 function Admin() {

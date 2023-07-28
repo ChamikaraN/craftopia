@@ -1,6 +1,5 @@
 import React from "react";
 import { Button as BsButton } from "react-bootstrap";
-import "./style.css";
 
 interface ButtonProps {
   type?: "button" | "reset" | "submit";

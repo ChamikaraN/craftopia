@@ -1,6 +1,5 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import Button from "@atoms/Client/Button";
 
 interface PopUpProps {
   show: boolean;
@@ -10,28 +9,14 @@ interface PopUpProps {
   message: string;
 }
 
-const PopUp: React.FC<PopUpProps> = ({
-  show,
-  hide,
-  onConfirm,
-  title,
-  message,
-}) => {
+const PopUp: React.FC<PopUpProps> = ({ show, hide, title, message }) => {
   return (
     <Modal show={show} onHide={() => hide()} backdrop="static" keyboard={false}>
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{message}</Modal.Body>
-      <Modal.Footer>
-        <Button variant={"danger"} onClickHandler={hide} title={"Cancel"} />
-        <Button
-          variant={"primary"}
-          onClickHandler={onConfirm}
-          title={"Delete"}
-          styles={"float-left"}
-        />
-      </Modal.Footer>
+      <Modal.Footer></Modal.Footer>
     </Modal>
   );
 };

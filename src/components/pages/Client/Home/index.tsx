@@ -4,7 +4,6 @@ import Banner from "@organisms/Client/Home/Banner";
 import BestCatagories from "@organisms/Client/Home/BestCatagories";
 import Newsletter from "@organisms/Client/Home/Newsletter";
 import SpecialSelection from "@organisms/Client/Home/SpecialSelection";
-import "./styles.css";
 import useFetchProducts from "@/hooks/product/useFetchProducts";
 import useFetchCategories from "@/hooks/category/useFetchCategories";
 import { useAppSelector } from "@/redux/hooks";
