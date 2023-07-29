@@ -1,20 +1,35 @@
 import React from "react";
 import { faShoppingCart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Product } from "@/types";
-
+import { CartItem, Product } from "@/types";
+import { useAppDispatch } from "@/redux/hooks";
+import { addItem } from "@redux/Cart/cartSlice";
 interface ItemCardProps {
   product: Product;
   key: string;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ product, key }) => {
+  const dispatch = useAppDispatch();
   const imageUrl = typeof product.image === "string" ? product.image : "";
+  const handleAddToCart = () => {
+    const cartItem: CartItem = {
+      productId: product._id ?? "",
+      name: product.name,
+      price: product.price,
+      amount: 1,
+      image: typeof product.image === "string" ? product.image : "",
+    };
+    dispatch(addItem(cartItem));
+  };
   return (
     <div key={key} className="col-md-6 col-lg-4 col-xl-3 p-2 best">
       <div className="collection-img position-relative">
         <img src={imageUrl} className="w-100" alt={`Product ${key}`} />
-        <span className="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">
+        <span
+          className="position-absolute bg-primary text-white d-flex align-items-center justify-content-center"
+          onClick={() => handleAddToCart()}
+        >
           <FontAwesomeIcon icon={faShoppingCart} />
         </span>
       </div>

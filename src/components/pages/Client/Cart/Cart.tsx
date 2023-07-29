@@ -1,12 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faRefresh } from "@fortawesome/free-solid-svg-icons";
-import { useAppDispatch } from "@redux/hooks";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { clearCart } from "@redux/Cart/cartSlice";
 import "./styles.css";
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { cartItems, totalAmount } = useAppSelector((state) => state.cart);
   return (
     <section className="cart">
       <section className="h-100 h-custom">
@@ -41,19 +42,13 @@ const Cart: React.FC = () => {
                             <h6 className="text-black mb-0">Cotton T-shirt</h6>
                           </div>
                           <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
-                            <button className="btn btn-link px-2">
+                            <div className="">
                               <FontAwesomeIcon icon={faMinus} />
-                            </button>
-                            <input
-                              min={0}
-                              name="quantity"
-                              defaultValue={1}
-                              type="number"
-                              className="form-control form-control-sm"
-                            />
-                            <button className="btn btn-link px-2">
+                            </div>
+                            <div className="">1</div>
+                            <div className="">
                               <FontAwesomeIcon icon={faPlus} />
-                            </button>
+                            </div>
                           </div>
                           <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                             <h6 className="mb-0">€ 44.00</h6>
@@ -133,7 +128,7 @@ const Cart: React.FC = () => {
                         <hr className="my-4" />
                         <div className="d-flex justify-content-between mb-5">
                           <h5 className="text-uppercase">Total price</h5>
-                          <h5>€ 137.00</h5>
+                          <h5>{totalAmount}</h5>
                         </div>
                         <button
                           type="button"

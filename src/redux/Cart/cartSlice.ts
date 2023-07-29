@@ -1,39 +1,14 @@
+import { CartItem } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface CartItem {
-  id: number;
-  amount: number;
-  price: number;
-}
 
 export interface CartState {
   cartItems: CartItem[];
-  amount: number;
-  total: number;
-  isLoading: boolean;
+  totalAmount: number;
 }
 
 const initialState: CartState = {
-  cartItems: [
-    {
-      id: 1,
-      amount: 10,
-      price: 10,
-    },
-    {
-      id: 1,
-      amount: 10,
-      price: 10,
-    },
-    {
-      id: 1,
-      amount: 10,
-      price: 10,
-    },
-  ],
-  amount: 0,
-  total: 0,
-  isLoading: false,
+  cartItems: [],
+  totalAmount: 0,
 };
 
 const cartSlice = createSlice({
@@ -45,40 +20,68 @@ const cartSlice = createSlice({
     },
     addItem: (state, action: PayloadAction<CartItem>) => {
       const item = action.payload;
-      state.cartItems = [...state.cartItems, item];
-    },
-    removeItem: (state, action: PayloadAction<number>) => {
-      const itemId = action.payload;
-      state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
-    },
-    increase: (state, action: PayloadAction<{ id: number }>) => {
-      const { id } = action.payload;
-      const cartItem = state.cartItems.find((item) => item.id === id);
-      if (cartItem) {
-        cartItem.amount = cartItem.amount + 1;
+      const existingItemIndex = state.cartItems.findIndex(
+        (cartItem) => cartItem.productId === item.productId
+      );
+
+      if (existingItemIndex !== -1) {
+        // If the item already exists in the cart, increase the quantity
+        state.cartItems[existingItemIndex].amount += item.amount;
+      } else {
+        // If the item is new, add it to the cartItems array
+        state.cartItems.push(item);
       }
+      state.totalAmount = state.cartItems.reduce(
+        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        0
+      );
     },
-    decrease: (state, action: PayloadAction<{ id: number }>) => {
-      const { id } = action.payload;
-      const cartItem = state.cartItems.find((item) => item.id === id);
+    removeItem: (state, action: PayloadAction<string>) => {
+      const productId = action.payload;
+      state.cartItems = state.cartItems.filter(
+        (item) => item.productId !== productId
+      );
+
+      // Update totalAmount whenever an item is removed
+      state.totalAmount = state.cartItems.reduce(
+        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        0
+      );
+    },
+    increase: (state, action: PayloadAction<string>) => {
+      const productId = action.payload;
+      const cartItem = state.cartItems.find(
+        (item) => item.productId === productId
+      );
       if (cartItem) {
-        cartItem.amount = cartItem.amount - 1;
+        cartItem.amount += 1;
       }
+
+      // Update totalAmount whenever an item's quantity is increased
+      state.totalAmount = state.cartItems.reduce(
+        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        0
+      );
     },
-    calculateTotals: (state) => {
-      let amount = 0;
-      let total = 0;
-      state.cartItems.forEach((item) => {
-        amount += item.amount;
-        total += item.amount * item.price;
-      });
-      state.amount = amount;
-      state.total = total;
+    decrease: (state, action: PayloadAction<string>) => {
+      const productId = action.payload;
+      const cartItem = state.cartItems.find(
+        (item) => item.productId === productId
+      );
+      if (cartItem && cartItem.amount > 1) {
+        cartItem.amount -= 1;
+      }
+
+      // Update totalAmount whenever an item's quantity is decreased
+      state.totalAmount = state.cartItems.reduce(
+        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        0
+      );
     },
   },
 });
 
-export const { clearCart, removeItem, increase, decrease, calculateTotals } =
+export const { clearCart, addItem, removeItem, increase, decrease } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
