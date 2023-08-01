@@ -3,26 +3,21 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { lazy } from "react";
-
 import { RootErrorBoundary } from "@pages/RootErrorBoundary";
 import { ProjectErrorBoundary } from "@pages/ProjectErrorBoundary";
 
-const Home = lazy(() => import("@pages/Client/Home"));
-const Shop = lazy(() => import("@pages/Client/Shop/Shop"));
-const Cart = lazy(() => import("@pages/Client/Cart/Cart"));
-const Login = lazy(() => import("@pages/Admin/Login"));
-const Admin = lazy(() => import("@pages/Admin/Dashboard"));
-const Categories = lazy(() => import("@pages/Admin/Categories"));
-const Products = lazy(() => import("@/components/pages/Admin/Products"));
-const Orders = lazy(() => import("@pages/Admin/Orders"));
-const Settings = lazy(() => import("@pages/Admin/Settings"));
-const AddEditCategory = lazy(
-  () => import("@/components/pages/Admin/Categories/AddEditCategory")
-);
-const AddEditProduct = lazy(
-  () => import("@/components/pages/Admin/Products/AddEditProduct")
-);
+import Home from "@pages/Client/Home";
+import Shop from "@pages/Client/Shop/Shop";
+import Cart from "@pages/Client/Cart/Cart";
+import Login from "@pages/Admin/Login";
+import Admin from "@pages/Admin/Dashboard";
+import Categories from "@pages/Admin/Categories";
+import Products from "@/components/pages/Admin/Products";
+import Orders from "@pages/Admin/Orders";
+import Settings from "@pages/Admin/Settings";
+import { lazy } from "react";
+import AddEditCategory from "@/components/pages/Admin/Categories/AddEditCategory";
+import AddEditProduct from "@/components/pages/Admin/Products/AddEditProduct";
 
 const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
 const PublicRoutes = lazy(() => import("./PublicRoutes"));

@@ -5,7 +5,7 @@ interface ButtonProps {
   type?: "button" | "reset" | "submit";
   variant?: string;
   onClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  size: "sm" | "lg";
+  size?: "sm" | "lg";
   isDisable?: boolean;
   title: React.ReactNode;
   styles?: string;

@@ -53,9 +53,9 @@ const cartSlice = createSlice({
 
       if (existingItemIndex !== -1) {
         // If the item already exists in the cart, increase the quantity
-        state.cartItems[existingItemIndex].amount += item.amount;
+        state.cartItems[existingItemIndex].quantity += item.quantity;
         toast.success(
-          `${state.cartItems[existingItemIndex].amount} - ${item.name} added to cart`
+          `${state.cartItems[existingItemIndex].quantity} - ${item.name} added to cart`
         );
       } else {
         // If the item is new, add it to the cartItems array
@@ -63,7 +63,7 @@ const cartSlice = createSlice({
         toast.success(`${item.name} added to cart`);
       }
       state.totalAmount = state.cartItems.reduce(
-        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        (total, cartItem) => total + cartItem.quantity * cartItem.price,
         0
       );
       saveCartItemsToLocalStorage(state.cartItems);
@@ -77,7 +77,7 @@ const cartSlice = createSlice({
 
       // Update totalAmount whenever an item is removed
       state.totalAmount = state.cartItems.reduce(
-        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        (total, cartItem) => total + cartItem.quantity * cartItem.price,
         0
       );
       saveCartItemsToLocalStorage(state.cartItems);
@@ -89,12 +89,12 @@ const cartSlice = createSlice({
         (item) => item.productId === productId
       );
       if (cartItem) {
-        cartItem.amount += 1;
+        cartItem.quantity += 1;
       }
 
       // Update totalAmount whenever an item's quantity is increased
       state.totalAmount = state.cartItems.reduce(
-        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        (total, cartItem) => total + cartItem.quantity * cartItem.price,
         0
       );
       saveCartItemsToLocalStorage(state.cartItems);
@@ -105,12 +105,12 @@ const cartSlice = createSlice({
       const cartItem = state.cartItems.find(
         (item) => item.productId === productId
       );
-      if (cartItem && cartItem.amount > 1) {
-        cartItem.amount -= 1;
+      if (cartItem && cartItem.quantity > 1) {
+        cartItem.quantity -= 1;
       }
 
       state.totalAmount = state.cartItems.reduce(
-        (total, cartItem) => total + cartItem.amount * cartItem.price,
+        (total, cartItem) => total + cartItem.quantity * cartItem.price,
         0
       );
       saveCartItemsToLocalStorage(state.cartItems);

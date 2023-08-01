@@ -17,7 +17,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ product, key }) => {
       productId: product._id ?? "",
       name: product.name,
       price: product.price,
-      amount: 1,
+      quantity: 1,
       image: typeof product.image === "string" ? product.image : "",
     };
     dispatch(addItem(cartItem));

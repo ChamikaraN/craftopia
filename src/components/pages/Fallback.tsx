@@ -1,5 +1,5 @@
 function Fallback() {
-  return <p>Performing initial data "load"</p>;
+  return <p>OOOPS Page Not Found</p>;
 }
 
 export default Fallback;

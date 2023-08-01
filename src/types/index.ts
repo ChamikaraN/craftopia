@@ -29,6 +29,25 @@ export interface CartItem {
   productId: string;
   name: string;
   price: number;
-  amount: number;
+  quantity: number;
   image: string;
 }
+
+export type Order = {
+  products: {
+    product: string;
+    price: string;
+    quantity: string;
+  }[];
+  totalAmount: string;
+  customerName: string;
+  contactNumber: string;
+  shippingAddress: string;
+};
+
+export type AdminStatus = {
+  totalCategories: number;
+  totalProducts: number;
+  totalOrders: number;
+  totalRevenue: number;
+};
