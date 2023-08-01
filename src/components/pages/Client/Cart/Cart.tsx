@@ -1,8 +1,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faRefresh } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMinus,
+  faPlus,
+  faRefresh,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { clearCart } from "@redux/Cart/cartSlice";
+import {
+  clearCart,
+  decrease,
+  increase,
+  removeItem,
+} from "@redux/Cart/cartSlice";
 import "./styles.css";
 
 const Cart: React.FC = () => {
@@ -26,40 +36,67 @@ const Cart: React.FC = () => {
                           <h2 className="mb-0 text-black">
                             Your Order Summary
                           </h2>
-                          <h6 className="mb-0 text-muted">3 items</h6>
+                          <h6 className="mb-0 text-muted">
+                            {cartItems.length > 0 && cartItems.length} items
+                          </h6>
                         </div>
                         <hr className="my-4" />
-                        <div className="row mb-4 d-flex justify-content-between align-items-center">
-                          <div className="col-md-2 col-lg-2 col-xl-2">
-                            <img
-                              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
-                              className="img-fluid rounded-3"
-                              alt="Cotton T-shirt"
-                            />
-                          </div>
-                          <div className="col-md-3 col-lg-3 col-xl-3">
-                            <h6 className="text-muted">Shirt</h6>
-                            <h6 className="text-black mb-0">Cotton T-shirt</h6>
-                          </div>
-                          <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
-                            <div className="">
-                              <FontAwesomeIcon icon={faMinus} />
-                            </div>
-                            <div className="">1</div>
-                            <div className="">
-                              <FontAwesomeIcon icon={faPlus} />
-                            </div>
-                          </div>
-                          <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                            <h6 className="mb-0">€ 44.00</h6>
-                          </div>
-                          <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                            <a href="#!" className="text-muted">
-                              <i className="fas fa-times" />
-                            </a>
-                          </div>
-                        </div>
-                        <hr className="my-4" />
+                        {cartItems.map((item) => {
+                          return (
+                            <>
+                              <div className="row mb-4 d-flex justify-content-between align-items-center cart-items">
+                                <div className="col-md-2 col-lg-2 col-xl-2">
+                                  <img
+                                    src={item.image}
+                                    className="img-fluid rounded-3"
+                                    alt={item.name}
+                                  />
+                                </div>
+                                <div className="col-md-3 col-lg-3 col-xl-3">
+                                  <h6 className="text-muted">{item.name}</h6>
+                                </div>
+                                <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                  {item.amount > 1}
+                                  <button
+                                    className="btn pr-2"
+                                    disabled={item.amount > 1 ? false : true}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      dispatch(decrease(item.productId));
+                                    }}
+                                  >
+                                    <FontAwesomeIcon icon={faMinus} />
+                                  </button>
+                                  <div className="p-2">{item.amount}</div>
+                                  <button
+                                    className="btn pl-2"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      dispatch(increase(item.productId));
+                                    }}
+                                  >
+                                    <FontAwesomeIcon icon={faPlus} />
+                                  </button>
+                                </div>
+                                <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                  <h6 className="mb-0">$ {item.price}</h6>
+                                </div>
+                                <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                  <div
+                                    className="text-muted"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      dispatch(removeItem(item.productId));
+                                    }}
+                                  >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                  </div>
+                                </div>
+                              </div>
+                              <hr className="my-4" />
+                            </>
+                          );
+                        })}
                         <div className="row">
                           <div className="col">
                             <div className="pt-5">
@@ -94,49 +131,51 @@ const Cart: React.FC = () => {
                     </div>
                     <div className="col-lg-4 bg-grey">
                       <div className="p-5">
-                        <h3 className="mb-5 pt-1">Summary</h3>
+                        <h3 className="mb-5 pt-1">Contact Details</h3>
                         <hr className="my-4" />
-                        <div className="d-flex justify-content-between mb-4">
-                          <h5 className="text-uppercase">items 3</h5>
-                          <h5>€ 132.00</h5>
-                        </div>
-                        <h5 className="text-uppercase mb-3">Shipping</h5>
-                        <div className="mb-4 pb-2">
-                          <select className="select">
-                            <option value={1}>Standard-Delivery- €5.00</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                            <option value={4}>Four</option>
-                          </select>
-                        </div>
-                        <h5 className="text-uppercase mb-3">Give code</h5>
-                        <div className="mb-5">
-                          <div className="form-outline">
+                        <form>
+                          <div className="form-group mb-3">
+                            <label htmlFor="name">Full Name</label>
                             <input
                               type="text"
-                              id="form3Examplea2"
-                              className="form-control form-control-lg"
+                              className="form-control"
+                              id="name"
+                              placeholder="Chamikara Nayanajith"
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Examplea2"
-                            >
-                              Enter your code
-                            </label>
                           </div>
-                        </div>
+                          <div className="form-group mb-3">
+                            <label htmlFor="name">Contact Number</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="name"
+                              placeholder="+94715122890"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="name">Address</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="name"
+                              placeholder="22/1, First Lane, Colombo - 06"
+                            />
+                          </div>
+                        </form>
                         <hr className="my-4" />
-                        <div className="d-flex justify-content-between mb-5">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5 className="text-uppercase">delivery fee</h5>
+                          <h5>free</h5>
+                        </div>
+                        <div className="d-flex justify-content-between mb-2">
                           <h5 className="text-uppercase">Total price</h5>
                           <h5>{totalAmount}</h5>
                         </div>
-                        <button
-                          type="button"
-                          className="btn btn-dark btn-block btn-lg"
-                          data-mdb-ripple-color="dark"
-                        >
-                          Register
-                        </button>
+                        <div className="d-flex justify-content-end">
+                          <button className="btn btn-dark btn-block btn-sm ">
+                            Place Order
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

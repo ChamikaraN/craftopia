@@ -2,3 +2,11 @@
   padding-top: 8rem !important;
   padding-bottom: 3rem !important;
 }
+
+.cart-items .btn {
+  background-color: #fff !important;
+  color: rgb(85, 85, 85) !important;
+  padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x) !important;
+  border-radius: 25px !important;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color) !important;
+}
