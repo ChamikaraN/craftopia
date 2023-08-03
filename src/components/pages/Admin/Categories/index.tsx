@@ -2,7 +2,7 @@ import PopUp from "@/components/organisms/Admin/PopUp";
 import useFetchCategories from "@/hooks/category/useFetchCategories";
 import { useAppSelector } from "@/redux/hooks";
 import { Category } from "@/types";
-import { faAdd, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import useDeleteCategory from "@/hooks/category/useDeleteCategory";

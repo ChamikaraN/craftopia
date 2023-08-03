@@ -10,14 +10,14 @@ interface InputProps {
   isInvalid?: boolean;
 }
 
-const Input = ({
+const Input: React.FC<InputProps> = ({
   label,
   value,
   type,
   placeholder,
   onChange,
   isInvalid,
-}: InputProps) => {
+}) => {
   return (
     <Form.Group className="mb-3" controlId={`formBasic${label}`}>
       <Form.Label>{label}</Form.Label>

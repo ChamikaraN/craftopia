@@ -14,7 +14,7 @@ interface SelectProps {
   onChange: (value: string) => void;
 }
 
-const Select = ({ label, value, onChange, options }: SelectProps) => {
+const Select: React.FC<SelectProps> = ({ label, value, onChange, options }) => {
   return (
     <Form.Group className="mb-3" controlId={`formBasic${label}`}>
       <Form.Label>{label}</Form.Label>

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Declared but its value is never read
 import React from "react";
 import Button from "../components/atoms/Client/Button";
 import { render, screen } from "@testing-library/react";
