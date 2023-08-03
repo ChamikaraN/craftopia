@@ -9,3 +9,12 @@ export const placeOrder = async (orderData: Order): Promise<Order> => {
     throw new Error("Failed to add order");
   }
 };
+
+export const fetchOrders = async (): Promise<Order[]> => {
+  try {
+    const response = await axios.get<Order[]>("order");
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to fetch orders");
+  }
+};

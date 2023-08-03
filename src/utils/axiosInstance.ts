@@ -1,8 +1,11 @@
 import axios from "axios";
-import AuthService from "@services/AuthService";
+import {
+  getAccessToken,
+  isAccessTokenExpired,
+  refreshAccessToken,
+} from "@services/AuthService";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-const authService = new AuthService();
 
 const axiosInstance = axios.create({
   baseURL: apiUrl,
@@ -11,33 +14,21 @@ const axiosInstance = axios.create({
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   async (config) => {
-    let accessToken = authService.getAccessToken();
-    if (!accessToken) {
-      // Fetch access token from the server
-      try {
-        const response = await authService.fetchAccessToken();
-        accessToken = response.accessToken;
-      } catch (error) {
-        // Handle error while fetching access token
-        console.error(error);
-      }
-    } else {
-      // Check if access token is expired
-      const isTokenExpired = authService.isAccessTokenExpired();
+    let accessToken = getAccessToken();
+
+    if (accessToken) {
+      const isTokenExpired = isAccessTokenExpired();
 
       if (isTokenExpired) {
         // Refresh access token
         try {
-          const response = await authService.refreshAccessToken();
+          const response = await refreshAccessToken();
           accessToken = response.accessToken;
         } catch (error) {
           // Handle error while refreshing access token
           console.error(error);
         }
       }
-    }
-
-    if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
 

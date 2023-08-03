@@ -3,13 +3,13 @@ import { toast } from "react-toastify";
 import logEvent from "@utils/logger";
 import { ERROR, INFO } from "@constants/sanityConst";
 import { Product } from "@/types";
+import { editProduct } from "@/services/ProductService";
 import { useNavigate } from "react-router-dom";
-import { addProduct } from "@/services/ProductService";
 
-const useAddProduct = () => {
+export const useEditProduct = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  return useMutation<Product, Error, FormData>(addProduct, {
+  return useMutation<Product, Error, FormData>(editProduct, {
     onSuccess: async (data) => {
       queryClient.invalidateQueries("fetch-products");
       toast.success("Product added successfully 👌");
@@ -24,5 +24,3 @@ const useAddProduct = () => {
     },
   });
 };
-
-export default useAddProduct;

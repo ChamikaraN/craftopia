@@ -34,6 +34,7 @@ export interface CartItem {
 }
 
 export type Order = {
+  _id?: string;
   products: {
     product: string;
     price: string;
@@ -51,3 +52,8 @@ export type AdminStatus = {
   totalOrders: number;
   totalRevenue: number;
 };
+
+export interface LoginCredentials {
+  username: string;
+  password: string;
+}

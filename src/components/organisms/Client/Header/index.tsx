@@ -1,17 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { startTransition, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHeart,
   faMasksTheater,
   faShoppingCart,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "@redux/hooks";
 import "./styles.css";
+import { isAccessTokenExpired } from "@/services/AuthService";
 
 const Header: React.FC = () => {
   const [navbarToggled, setNavbarToggled] = useState(false);
   const { cartItems } = useAppSelector((state) => state.cart);
+  const auth = isAccessTokenExpired();
+  const navigate = useNavigate();
+
+  const handleAdmin = () => {
+    try {
+      startTransition(() => navigate("/admin/dashboard"));
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Handle logout error if needed
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
       <div className="container">
@@ -33,14 +46,17 @@ const Header: React.FC = () => {
               {cartItems.length > 0 && cartItems.length}
             </span>
           </button>
-          <button type="button" className="btn position-relative">
-            <span className="icon">
-              <FontAwesomeIcon icon={faHeart} />
-            </span>
-            <span className="position-absolute top-0 start-100 translate-middle badge">
-              2
-            </span>
-          </button>
+          {!auth && (
+            <button
+              type="button"
+              className="btn position-relative"
+              onClick={handleAdmin}
+            >
+              <span className="icon">
+                <FontAwesomeIcon icon={faUser} />
+              </span>
+            </button>
+          )}
         </div>
         <button
           className="navbar-toggler border-0"
@@ -61,11 +77,11 @@ const Header: React.FC = () => {
                 <Link to="/">Home</Link>
               </span>
             </li>
-            <li className="nav-item px-2 py-2">
+            {/* <li className="nav-item px-2 py-2">
               <span className="nav-link text-uppercase ">
                 <Link to="shop">Shop</Link>
               </span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

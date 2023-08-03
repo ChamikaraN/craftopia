@@ -116,7 +116,6 @@ function Admin() {
               <table className="table table-borderless table-hover">
                 <thead>
                   <tr>
-                    <th>Product</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
@@ -125,17 +124,8 @@ function Admin() {
                 </thead>
                 <tbody>
                   {topSellingData?.map((product) => {
-                    const imageUrl =
-                      typeof product.image === "string" ? product.image : "";
                     return (
                       <tr key={product._id}>
-                        <td>
-                          <img
-                            src={imageUrl}
-                            className="rounded w-25"
-                            alt={`Product ${product._id}`}
-                          />
-                        </td>
                         <td className="align-middle">{product.name}</td>
                         <td className="align-middle">{product.description}</td>
                         <td className="align-middle">$ {product.price}</td>

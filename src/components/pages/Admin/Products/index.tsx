@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/redux/hooks";
 import { Product } from "@/types";
-import { faAdd, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAdd,
+  faEdit,
+  faRedo,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PopUp from "@/components/organisms/Admin/PopUp";
 import useFetchProducts from "@/hooks/product/useFetchProducts";
 import useDeleteProduct from "@/hooks/product/useDeleteProduct";
+import "./styles.css";
 
 const Products: React.FC = () => {
   const { isLoading } = useFetchProducts();
@@ -34,10 +40,13 @@ const Products: React.FC = () => {
   const showDeletePopUp = (product: Product) => {
     setPopupContent(
       <div>
-        <p>Do you need to delete {product.name} product</p>
+        <p>
+          Do you need to {product.status ? "disable" : "enable"} {product.name}{" "}
+          product
+        </p>
       </div>
     );
-    setPopupAction("Delete");
+    setPopupAction(product.status ? "Disable" : "Enable");
     setShowPopUp(true);
     setSelectedProduct(product);
   };
@@ -114,14 +123,25 @@ const Products: React.FC = () => {
                               alt={`Product ${product._id}`}
                             />
                           </td>
-                          <td className="align-middle">{product.name}</td>
+                          <td
+                            className={`align-middle ${
+                              product.status ? "" : "disabled-product"
+                            }`}
+                          >
+                            {product.name}
+                          </td>
+
                           <td className="align-middle">
                             {product.description}
                           </td>
                           <td className="align-middle">$ {product.price}</td>
                           <td className="align-middle">{product.stock}</td>
                           <td className="align-middle">
-                            <div onClick={() => {}}>
+                            <div
+                              onClick={() => {
+                                navigate(`/admin/products/edit/${product._id}`);
+                              }}
+                            >
                               <FontAwesomeIcon icon={faEdit} />
                             </div>
                             <div
@@ -129,7 +149,9 @@ const Products: React.FC = () => {
                                 showDeletePopUp(product);
                               }}
                             >
-                              <FontAwesomeIcon icon={faTrash} />
+                              <FontAwesomeIcon
+                                icon={product.status ? faTrash : faRedo}
+                              />
                             </div>
                           </td>
                         </tr>

@@ -10,10 +10,10 @@ const useDeleteProduct = () => {
   return useMutation<void, Error, string>((id) => deleteProduct(id), {
     onSuccess: () => {
       queryClient.invalidateQueries("fetch-products");
-      toast.success("Product deleted successfully 👌");
+      toast.success("Product status changed successfully 👌");
     },
     onError: async (error) => {
-      toast.error("Failed to delete product 😲");
+      toast.error("Failed to change status product 😲");
       await logEvent(ERROR, error.message, { additionalData: error.stack });
     },
   });

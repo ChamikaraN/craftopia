@@ -113,9 +113,6 @@ const Categories: React.FC = () => {
                             {category.description}
                           </td>
                           <td className="align-middle">
-                            <div onClick={() => {}}>
-                              <FontAwesomeIcon icon={faEdit} />
-                            </div>
                             <div
                               onClick={() => {
                                 showDeletePopUp(category);

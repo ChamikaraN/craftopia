@@ -1,4 +1,7 @@
 import {
+  faBox,
+  faBoxesStacked,
+  faCartShopping,
   faMasksTheater,
   faTachometerAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,7 +32,7 @@ function Sidebar() {
       <hr className="sidebar-divider my-0" />
       <li className="nav-item active">
         <a className="nav-link" href="/admin/dashboard">
-          <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
+          <FontAwesomeIcon className="fa-fw mr-1" icon={faTachometerAlt} />
           <span>Dashboard</span>
         </a>
       </li>
@@ -37,7 +40,7 @@ function Sidebar() {
 
       <li className="nav-item ">
         <a className="nav-link" href="/admin/categories">
-          <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
+          <FontAwesomeIcon className="fa-fw mr-1" icon={faBoxesStacked} />
           <span>Categories</span>
         </a>
       </li>
@@ -45,7 +48,7 @@ function Sidebar() {
 
       <li className="nav-item ">
         <a className="nav-link" href="/admin/products">
-          <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
+          <FontAwesomeIcon className="fa-fw mr-1" icon={faBox} />
           <span>Products</span>
         </a>
       </li>
@@ -53,7 +56,7 @@ function Sidebar() {
 
       <li className="nav-item ">
         <a className="nav-link" href="/admin/orders">
-          <FontAwesomeIcon className="fa-fw" icon={faTachometerAlt} />
+          <FontAwesomeIcon className="fa-fw mr-1" icon={faCartShopping} />
           <span>Orders</span>
         </a>
       </li>
