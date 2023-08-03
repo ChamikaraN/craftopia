@@ -4,11 +4,13 @@ import { useNavigate, useRouteError } from "react-router-dom";
 export default function ErrorComponent({ error }) {
   const routeError = useRouteError();
   const navigate = useNavigate();
-  const errorMessage = error
-    ? error.message
-    : routeError
-    ? routeError?.error?.message || routeError?.statusText
-    : "";
+  let errorMessage = "";
+
+  if (error) {
+    errorMessage = error.message;
+  } else if (routeError) {
+    errorMessage = routeError?.error?.message || routeError?.statusText;
+  }
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">

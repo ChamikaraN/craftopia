@@ -123,9 +123,7 @@ const Cart: React.FC = () => {
                                       {item.quantity > 1}
                                       <button
                                         className="btn pr-2"
-                                        disabled={
-                                          item.quantity > 1 ? false : true
-                                        }
+                                        disabled={item.quantity <= 1}
                                         onClick={(e) => {
                                           e.preventDefault();
                                           dispatch(decrease(item.productId));
